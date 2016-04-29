@@ -10,7 +10,7 @@ location /pinche
         fastcgi_param DEBUG 1; #加入debug参数
         include fastcgi.conf;
     }
-====2. /etc/php-fpm.conf
+====2. /etc/php-fpm.conf   
   env[DEBUG]=1
 =====php code ====
   if(isset($_SERVER['DEBUG'])){
