@@ -1,3 +1,11 @@
 深入理解PHP内核：http://www.php-internals.com/book/?p=chapt01/01-00-prepare-and-background
-c语言及unix编程 就看这本
-http://hilojack.com/c/ 全部练习都做一遍
+c语言及unix编程
+Linux C编程一站式学习 http://hilojack.com/c/ 
+
+PHP与MySQL程序设计(第4版) https://www.amazon.cn/PHP%E4%B8%8EMySQL%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-W-Jason-Gilmore/dp/B0058D5XSS/ref=sr_1_4?ie=UTF8&qid=1463472294&sr=8-4&keywords=php+mysql
+深入PHP:面向对象、模式与实践(第3版) https://www.amazon.cn/%E6%B7%B1%E5%85%A5PHP-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%AE%9E%E8%B7%B5-Mart-Zandstra/dp/B005D6IRRY/ref=sr_1_1?ie=UTF8&qid=1463642635&sr=8-1&keywords=%E6%B7%B1%E5%85%A5PHP%3A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E3%80%81%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%AE%9E%E8%B7%B5%28%E7%AC%AC3%E7%89%88%29
+PHP 内核 http://www.php-internals.com/book/
+PHP 扩展开发 http://www.walu.cc/phpbook/index.md
+php 之道 http://www.phptherightway.com/
+php 之父在phpconf 上的演讲稿 http://talks.php.net/china16#/
+程序员必读书单http://lucida.me/blog/developer-reading-list/?qqdrsign=009d3
