@@ -1,0 +1,154 @@
+一、贪婪与非贪婪
+
+什么叫贪婪，比如说要从字符串中<td>面包一</td><td>面包二</td>吃面包，本来你只可以吃面包一，可是你贪心，于是就把第一个<td>到最后一个</td>里面的两个面包取出来了，你想多吃点，非贪婪也就是你不贪吃了，就只吃面包一。
+
+我们来看看正则里面是怎么贪婪的
+
+<?php
+
+$str = '<td>面包一</td><td>面包二</td>';
+preg_match('/<td>(.*)<\/td>/',$str,$res);
+print_r($res);
+
+结果：
+
+Array 
+( 
+    [0] => <td>面包一</td><td>面包二</td> 
+    [1] => 面包一</td><td>面包二 
+)
+
+0记录的是整个字符，1表示的是第一次匹配。
+
+怎么来限制贪婪？
+
+<?php
+$str = '<td>面包一</td><td>面包二</td>';
+preg_match('/<td>(.*?)<\/td>/',$str,$res);
+print_r($res);
+Array 
+( 
+    [0] => <td>面包一</td> 
+    [1] => 面包一 
+)
+
+在修饰匹配次数的特殊符号后再加上一个 "?" 号，则可以使匹配次数不定的表达式尽可能少的匹配。
+
+在PHP中还可以通过修饰符来实现，
+
+<?php
+$str = '<td>面包一</td><td>面包二</td>';
+preg_match('/<td>(.*)<\/td>/U',$str,$res);
+print_r($res);
+结果和上面一样。这就是修饰符U的作用
+
+ 
+
+二、预搜索
+
+预搜索是一个非获取匹配，不进行存储供以后使用。
+
+1、正向预搜索  "(?=xxxxx)"，"(?!xxxxx)"
+
+"(?=xxxxx)”:所在缝隙的右侧，必须能够匹配上 xxxxx 这部分的表达式，
+
+<?php
+$str = 'windows NT windows 2003 windows xp';
+preg_match('/windows (?=xp)/',$str,$res);
+print_r($res);
+结果：
+
+Array 
+( 
+    [0] => windows 
+)
+
+这个是xp前面的windows，不会取NT和2003前面的。
+
+格式："(?!xxxxx)"，所在缝隙的右侧，必须不能匹配 xxxxx 这部分表达式
+
+<?php
+$str = 'windows NT windows 2003 windows xp';
+preg_match_all('/windows (?!xp)/',$str,$res);
+print_r($res);
+结果：
+
+Array 
+( 
+    [0] => Array 
+        ( 
+            [0] => windows    这个是nt前面的 
+            [1] => windows    这个是2003前面的 
+        )
+
+)
+
+从这里可以看出，预搜索不进行存储供以后使用。
+
+与会存储的对比下。
+
+<?php
+$str = 'windows NT windows 2003 windows xp';
+preg_match_all('/windows ([^xp])/',$str,$res);
+print_r($res);
+结果：
+
+Array 
+( 
+    [0] => Array    全部模式匹配的数组    
+
+   ( 
+            [0] => windows N   
+            [1] => windows 2 
+        )
+
+    [1] => Array   子模式所匹配的字符串组成的数组，通过存储取得。 
+        ( 
+            [0] => N 
+            [1] => 2 
+        )
+
+)
+
+2、反向预搜索  "(?<=xxxxx)"，"(?<!xxxxx)"
+
+"(?<=xxxxx)" :所在缝隙的 "左侧”能够匹配xxxxx部分。 
+
+<?php
+$str = '1234567890123456';
+preg_match('/(?<=\d{4})\d+(?=\d{4})/',$str,$res);
+print_r($res);
+结果：
+
+Array 
+( 
+    [0] => 56789012 
+)
+
+匹配除了前4个数字和后4个数字之外的中间8个数字 
+"(?<!xxxxx)"：所在缝隙的“左侧”不能匹配xxxx部分。
+
+<?php
+$str = '我1234567890123456';
+preg_match('/(?<!我)\d+/',$str,$res);
+print_r($res);
+结果：
+Array 
+( 
+    [0] => 234567890123456 
+)
+
+ 
+
+三、preg和ereg的区别
+
+ 
+
+ 
+
+ 
+
+PHP同时使用两套正则表达式规则，一套是由电气和电子工程师协会（IEEE）制定的POSIX Extended 1003.2兼容正则（事实上PHP对此标准的支持并不完善），另一套来自PCRE（Perl Compatible Regular Expression）库提供PERL兼容正则。 PHP5.3开始POSIX被删除了。
+
+preg_match 比 ereg效率高。
+
