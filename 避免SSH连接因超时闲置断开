@@ -1,0 +1,6 @@
+经常在终端下登陆远程机器，但是上个厕所回来就发现掉线了。
+可以在/etc/ssh/ssh_config里设置一下
+
+ServerAliveInterval 60
+此后该系统里的用户连接SSH时，每60秒会发一个KeepAlive请求，避免被踢。根据实际情况调整ServerAliveInterval即可。
+
